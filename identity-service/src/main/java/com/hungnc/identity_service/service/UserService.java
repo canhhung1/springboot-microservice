@@ -1,6 +1,6 @@
 package com.hungnc.identity_service.service;
 
-import com.hungnc.identity_service.dto.request.UserDto;
+import com.hungnc.identity_service.dto.UserDto;
 import com.hungnc.identity_service.entity.User;
 import com.hungnc.identity_service.repository.UserRepository;
 
@@ -30,5 +30,10 @@ public class UserService {
         return users.stream()
                 .map(user -> modelMapper.map(user, UserDto.class))
                 .collect(Collectors.toList());
+    }
+
+    public UserDto getUserById(String id) {
+        User user = this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        return modelMapper.map(user, UserDto.class);
     }
 }

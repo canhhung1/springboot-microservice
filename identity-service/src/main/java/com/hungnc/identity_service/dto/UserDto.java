@@ -1,6 +1,4 @@
-package com.hungnc.identity_service.dto.request;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.hungnc.identity_service.dto;
 
 public class UserDto {
     private String id;
