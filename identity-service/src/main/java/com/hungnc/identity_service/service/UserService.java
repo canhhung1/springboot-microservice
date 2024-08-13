@@ -2,6 +2,8 @@ package com.hungnc.identity_service.service;
 
 import com.hungnc.identity_service.dto.UserDto;
 import com.hungnc.identity_service.entity.User;
+import com.hungnc.identity_service.exception.AppException;
+import com.hungnc.identity_service.exception.ErrorCode;
 import com.hungnc.identity_service.repository.UserRepository;
 
 import org.modelmapper.ModelMapper;
@@ -20,12 +22,12 @@ public class UserService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public User createUser(UserDto user) {
-        User newUser = modelMapper.map(user, User.class);
-        return this.userRepository.save(newUser);
+    public UserDto createUser(UserDto userDto) {
+        User user = userRepository.save(modelMapper.map(userDto, User.class));
+        return modelMapper.map(user, UserDto.class);
     }
 
-    public List<UserDto> getUser() {
+    public List<UserDto> getUsers() {
         List<User> users = this.userRepository.findAll();
         return users.stream()
                 .map(user -> modelMapper.map(user, UserDto.class))
@@ -33,7 +35,7 @@ public class UserService {
     }
 
     public UserDto getUserById(String id) {
-        User user = this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = this.userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND));
         return modelMapper.map(user, UserDto.class);
     }
 }

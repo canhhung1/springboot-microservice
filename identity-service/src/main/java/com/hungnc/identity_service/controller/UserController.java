@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 
@@ -15,13 +17,17 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("users")
-    public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
-        return new ResponseEntity<>(this.userService.createUser(userDto), HttpStatus.OK);
+    public ApiResponse<UserDto> createUser(@RequestBody UserDto userDto) {
+        ApiResponse<UserDto> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(this.userService.createUser(userDto));
+        return apiResponse;
     }
 
     @GetMapping("users")
-    public ResponseEntity<?> getUsers() {
-        return new ResponseEntity<>(this.userService.getUser(), HttpStatus.OK);
+    public ApiResponse<List<UserDto>> getUsers() {
+        ApiResponse<List<UserDto>> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(this.userService.getUsers());
+        return apiResponse;
     }
 
     @GetMapping("users/{id}")
