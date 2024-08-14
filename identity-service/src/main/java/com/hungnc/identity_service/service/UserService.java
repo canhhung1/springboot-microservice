@@ -8,6 +8,8 @@ import com.hungnc.identity_service.repository.UserRepository;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +25,8 @@ public class UserService {
     private ModelMapper modelMapper;
 
     public UserDto createUser(UserDto userDto) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User user = userRepository.save(modelMapper.map(userDto, User.class));
         return modelMapper.map(user, UserDto.class);
     }
