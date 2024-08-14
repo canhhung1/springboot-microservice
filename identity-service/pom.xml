@@ -55,6 +55,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
+			<version>9.37.2</version>
+		</dependency>
 
 		<!-- Convert DTO to Entity -->
 		<dependency>

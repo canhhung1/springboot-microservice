@@ -4,6 +4,8 @@ public enum ErrorCode {
 
     NOT_FOUND(1404, "Not Found"),
     UNCATEGORIZED_EXCEPTION(1405, "Uncategorized Exception"),
+    UNAUTHENTICATED(1406, "Unauthenticated Exception"),
+    TOKEN_INVALID(1407, "Token Invalid"),
     ;
 
     ErrorCode(int code, String message) {
