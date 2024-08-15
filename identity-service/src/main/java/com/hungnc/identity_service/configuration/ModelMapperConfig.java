@@ -1,11 +1,11 @@
-package com.hungnc.identity_service.config;
+package com.hungnc.identity_service.configuration;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AppConfig {
+public class ModelMapperConfig {
 
     @Bean
     public ModelMapper modelMapper() {
